@@ -86,3 +86,16 @@ h1, h2, h3, h4, h5, h6 {
 .ant-list-empty-text {
      padding: 0 !important;
 }
+
+.ant-modal-header{
+     background: transparent !important;
+}
+
+.ant-modal-content{
+     background: transparent !important;  
+}
+
+.ant-modal-title {
+     color: rgb(255, 255, 255) !important;
+     font-family: 'Orbitron', sans-serif !important
+}

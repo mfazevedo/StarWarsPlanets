@@ -25,7 +25,7 @@ class ErrorModal extends React.Component{
             >   
                 <Row>
                     <Col span={12}>
-                        <img src="MillenniumFalcon.jpg" alt="MillenniumFalcon" width="235" height="280"></img>
+                        <img src="MillenniumFalcon.png" alt="MillenniumFalcon" width="235" height="280"></img>
                     </Col>
                     <Col span={12}>
                         <div align='center' className='div-error'>
