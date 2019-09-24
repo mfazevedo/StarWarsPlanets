@@ -1,6 +1,11 @@
 import React           from 'react'
 import {Descriptions}  from 'antd'
 
+/**
+ * Component lista os detalhes do planeta recebido
+ * @param {Object} data Objeto contendo os dados do planeta
+ * @author Michael Azevedo <michaelfernandes@inheritdoc.uff.br>
+ */
 class PlanetDetails extends React.Component{
     render(){
         return(

@@ -1,3 +1,8 @@
+/*---------------------------------------------------------------
+| CSS para configuração geral dos componentes                   | 
+----------------------------------------------------------------*/  
+
+/*div do card principal*/
 .center-div{
      position: absolute;
      margin: auto;
@@ -8,94 +13,22 @@
      left: 0;
 }
 
-.ant-card-head{
-     background-color: darkslategrey
-}
-
+/*card principal*/
 .main-card{
      width: 400px
 }
 
+/*div do modal de erro*/
 .div-error{
      height: 280px;
 }
 
+/*div do card principal*/
 .magin-text-error{
      margin-top: 30%;
 }
 
+/*Definições gerais do body*/
 body, html {
      height: 120%;
-}
-   
-.bg {
-     background-image: url("bg.png");
-     height: 130%;
-     background-position: center;
-     background-repeat: repeat;
-     background-size: cover;
-     background
-}
-
-.ant-card-bordered {
-     border: 3px solid rgb(255, 233, 25) !important;
-}
-
-.ant-btn {
-     border: 3px solid transparent !important;
-     color: rgb(255, 233, 25) !important;
-     background-color: transparent !important;
-     border-color: rgb(255, 233, 25) !important
-}
-
-.ant-card {
-     background: transparent !important;
-}
-
-.ant-card-head {
-     color: rgb(255, 255, 255) !important;
-     border-bottom: 2px solid rgb(255, 233, 25) !important;
-     font-family: 'Turret Road', cursive !important;
-     font-size: 22px !important;
-}
-
-.ant-list {
-     color: rgb(255, 255, 255) !important;
-}
-
-.ant-descriptions-item-label {
-     color: rgb(255, 255, 255) !important;
-     font-family: 'Orbitron', sans-serif !important;
-}
-
-.ant-empty-normal {
-     color: rgb(255, 255, 255) !important;
-}
-
-.ant-descriptions-item-content {
-     color: rgb(255, 255, 255) !important;
-     font-family: 'Turret Road', cursive !important;
-     font-size: 20px !important;
-}
-
-h1, h2, h3, h4, h5, h6 {
-     color: rgb(255, 255, 255) !important;
-     font-family: 'Orbitron', sans-serif !important;
-}
-
-.ant-list-empty-text {
-     padding: 0 !important;
-}
-
-.ant-modal-header{
-     background: transparent !important;
-}
-
-.ant-modal-content{
-     background: transparent !important;  
-}
-
-.ant-modal-title {
-     color: rgb(255, 255, 255) !important;
-     font-family: 'Orbitron', sans-serif !important
 }
