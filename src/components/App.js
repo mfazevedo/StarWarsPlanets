@@ -37,6 +37,8 @@ class App extends React.Component {
         
         return(
             <div className='center-div' align='center'>
+                <img src="logo.png" alt="MillenniumFalcon" width="191" height="104"></img>
+                <h3>Planet's Info</h3>
                 <Card
                     title={activePlanet.name}
                     loading={loading}
