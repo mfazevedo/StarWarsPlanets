@@ -1,3 +1,9 @@
+/**
+ * Constantes contendo os tipos de ação que os reducers irão receber
+ * 
+ * @author Michael Azevedo <michaelfernandes@id.uff.br>
+ */
+
 export const FETCH_PLANETS_BEGIN            = 'fetch_planets_begin'
 export const FETCH_PLANET_SUCCESS           = 'fetch_planet_success'
 export const FETCH_PLANETS_FAILURE          = 'fetch_planets_failure'

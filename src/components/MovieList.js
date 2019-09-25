@@ -4,7 +4,7 @@ import { List } from 'antd'
 /**
  * Component lista os filmes recebidos
  * @param {Array} data Lista de filmes
- * @author Michael Azevedo <michaelfernandes@inheritdoc.uff.br>
+ * @author Michael Azevedo <michaelfernandes@id.uff.br>
  */
 class MovieList extends React.Component{
     render(){     

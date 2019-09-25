@@ -15,7 +15,7 @@ import {Button,Card}    from 'antd'
  * 
  * Container com ligação com a Store
  * 
- * @author Michael Azevedo <michaelfernandes@inheritdoc.uff.br>
+ * @author Michael Azevedo <michaelfernandes@id.uff.br>
  */
 class App extends React.Component {
     componentDidMount() {

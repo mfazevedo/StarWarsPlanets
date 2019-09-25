@@ -11,7 +11,7 @@ import React from 'react'
  * Component que é exibe exibido quando algum erro é apresentado
  * @param {String} message Erro ue é exibido como título do Modal
  * @param {function} action Ação a ser executada quando o botão de "Retry" do modal
- * @author Michael Azevedo <michaelfernandes@inheritdoc.uff.br>
+ * @author Michael Azevedo <michaelfernandes@id.uff.br>
  */
 class ErrorModal extends React.Component{
     render(){  
