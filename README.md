@@ -5,6 +5,8 @@
 
 # Star Wars Planet's Info
 
+### Publicado em https://starwars-planets-swapi.herokuapp.com 
+
 Utiliza dados da API SWAPI (https://swapi.co/) para mostrar um planeta aleatório a cada click no botão "NEXT".
 Possui um cache dos planetas já exibidos para menor trafego de rede.
 
