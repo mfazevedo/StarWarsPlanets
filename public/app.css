@@ -7,15 +7,19 @@
      position: absolute;
      margin: auto;
      align-self: center;
-     top: 2%;
+     background-size: 100% 100%;
      right: 0;
-     bottom: 0;
+     bottom: 2%;
      left: 0;
+     overflow-y: scroll;
+     top: 1%;
 }
 
 /*card principal*/
 .main-card{
-     width: 400px
+     width: 30%;
+     min-width: 200px;
+     max-width: 500px;
 }
 
 /*div do modal de erro*/
