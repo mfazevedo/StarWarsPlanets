@@ -1,3 +1,8 @@
+
+
+![StarWarsPlanets](https://github.com/mfazevedo/StarWarsPlanets/master/appFace.png)
+
+
 ###Star Wars Planet's Info
 Utiliza dados da API SWAPI (https://swapi.co/) para mostrar um planeta aleatório a cada click no botão "NEXT"
 
