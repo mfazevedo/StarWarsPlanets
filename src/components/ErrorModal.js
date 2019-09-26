@@ -16,6 +16,10 @@ import React from 'react'
 class ErrorModal extends React.Component{
     render(){  
 
+        const MillenniumFalcon = () =>{
+            return (<img src="MillenniumFalcon.png" alt="MillenniumFalcon" width="235" height="280"></img>)
+        }
+
         const TEXT_ERROR_BODY = 'Sorry, Millennium Falcon is under maintenance, we could not find a planet at the moment.'
    
         return(
@@ -24,14 +28,14 @@ class ErrorModal extends React.Component{
                 centered
                 visible={true}
                 footer={[
-                    <Button onClick={this.props.action}>
+                    <Button onClick={this.props.action} key={'buttonRetry'} className='retry-button'>
                         Retry
                     </Button>
                 ]}
             >   
                 <Row>
                     <Col span={12}>
-                        <img src="MillenniumFalcon.png" alt="MillenniumFalcon" width="235" height="280"></img>
+                        <MillenniumFalcon/>
                     </Col>
                     <Col span={12}>
                         <div align='center' className='div-error'>

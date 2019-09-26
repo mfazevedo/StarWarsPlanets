@@ -118,7 +118,12 @@ function getPlanetFromCache(planet){
   }
 }
 
-
+/**
+ * Função que chama a API para retorno da lista de filmes.
+ * chamado no inicio do sistema para alimentar a Store de filmes
+ * dispara função @see {apiCall} 
+ * @throws {Error} no caso de falha
+ */
 export function getFilms(){
   return dispatch => {    
       return apiCall(API_ADDRESS_FILMS)
@@ -126,13 +131,32 @@ export function getFilms(){
           dispatch(fetchAllFilms(json.results))
         })
         .catch(error => {
+          console.error(error)
           throw error
         })
   }
 }
 
+/**
+ * Realiza a chamada da API
+ * @param {string} address endereço da chamada de API
+ */
+function apiCall(address) {
+  return fetch(address)
+    .then(res => {
+      return res.json()
+    })
+    .catch(error => {
+      console.error(error)
+      throw error
+    })
+}
 
-
+/**
+ * Dado uma URL de filme retorna o Título do mesmo na Store.
+ * @param {String} filmUrl URL de chamada do filme (Utilizado como ID único)
+ * @Return {String} Título do filme
+ */
 function findFilmInStore(filmUrl){
     let obj =  _.find(filmList, {url: filmUrl})
     
@@ -144,56 +168,87 @@ function findFilmInStore(filmUrl){
     }
 }
 
+/**
+ * Atualiza o array de filmes contido em um planeta para os Nomes de cada filme
+ * no lugar de suas URL's
+ * @param {Object} planet Planeta contendo a lista de filmes
+ * @Return {Object} Planeta com array de filmes contendo os títulos
+ */
 function loadMovieListFromStore(planet){
   const films = planet.films.map( elt => findFilmInStore(elt))
   return Object.assign(planet, {films: films})
 }
 
+/**
+ * Atualiza o array de filmes contido em um array de planeta para os Nomes de cada filme
+ * no lugar de suas URL's
+ * @param {Array} planets Lista de Planetas
+ * @Return {Array} Lista de Planetas com array de filmes contendo os títulos
+ */
+function loadMovieListFromStoreMass(planets){
+  const planetList = planets.results.map( elt => loadMovieListFromStore(elt))
+  return Object.assign(planets, {results: planetList})
+}
+
+/**
+ * Salva a lista de filmes da store para adição do
+ * nome dos mesmos após as chamadas aos planetas
+ */
 function updateFilmListFromStore() {
   return (dispatch, getState) => {
     filmList = getState().films
   }
 }
 
-function loadMovieListFromStoreMass(planets){
-  const planetList = planets.results.map( elt => loadMovieListFromStore(elt))
-  return Object.assign(planets, {results: planetList})
-}
-
-function apiCall(address) {
-  return fetch(address)
-    .then(res => {
-      return res.json()
-    })
-    .catch(err => {
-      console.error(err)
-    })
-}
-
+/**
+ * Action creator para FETCH_FILMS
+ * @param {Array} films Array de filmes
+ */
 export const fetchAllFilms = films => ({
   type: FETCH_FILMS,
   payload: {films}
 })
 
+/**
+ * Action creator para FETCH_PLANETS_BEGIN
+ */
 export const fetchPlanetsBegin = () => ({
     type: FETCH_PLANETS_BEGIN
 })
 
+/**
+ * Action creator para RETRIEVE_PLANET_FROM_CACHE
+ * @param {Object} planet Planeta a ser retomado
+ */
 export const retrievePlanetFromCache = planet => ({
   type: RETRIEVE_PLANET_FROM_CACHE,
   payload: planet
 })
 
+/**
+ * Action creator para FETCH_PLANET_SUCCESS
+ * chama a função interna que substitui as URL's dos filmes pelos nomes
+ * @param {Object} planet Planeta a ser salvo
+ */
 export const fetchPlanetSuccess = planet => ({
     type: FETCH_PLANET_SUCCESS,
     payload: loadMovieListFromStore(planet)
 })
 
+/**
+ * Action creator para FETCH_MULTIPLE_PLANETS_SUCCESS
+ * chama a função interna que substitui as URL's dos filmes pelos nomes
+ * @param {Object} planetsData Planeta a ser salvo
+ */
 export const fetchMultiplePlanetsSuccess = planetsData => ({
   type: FETCH_MULTIPLE_PLANETS_SUCCESS,
   payload: loadMovieListFromStoreMass(planetsData)
 })
 
+/**
+ * Action creator para FETCH_PLANETS_FAILURE
+ * @param {Object} error Erro ao tentar salvar ou retomar os planetas e filmes
+ */
 export const fetchPlanetsFailure = error => ({
     type: FETCH_PLANETS_FAILURE,
     payload: error 

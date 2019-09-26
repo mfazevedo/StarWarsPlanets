@@ -15,6 +15,7 @@ const initialState = {
 }
 
 export default function(state = initialState, action){
+    //console.log("Action >", action)
     switch(action.type){
         case FETCH_PLANETS_BEGIN:
             return {
@@ -24,6 +25,7 @@ export default function(state = initialState, action){
                 activePlanet:{}
             }            
         case RETRIEVE_PLANET_FROM_CACHE:
+            
             return {
                 ...state,
                 error: null,

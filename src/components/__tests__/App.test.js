@@ -1,5 +1,5 @@
 import React           from 'react'
-import {mount}       from 'enzyme'
+import {mount}         from 'enzyme'
 import App             from '../App'
 import PlanetDetails   from '../PlanetDetails'
 import MovieList       from '../MovieList'
@@ -25,11 +25,11 @@ it('Main card rendered',()=>{
 })
 
 it('Planet details rendered',()=>{
-    expect(wrapped.find(PlanetDetails).length).toEqual(1)
+    expect(wrapped.find(PlanetDetails).length).toEqual(0)
 })
 
 it('Films list rendered',()=>{
-    expect(wrapped.find(MovieList).length).toEqual(1)
+    expect(wrapped.find(MovieList).length).toEqual(0)
 })
 
 it('Shuffle button rendered',()=>{
