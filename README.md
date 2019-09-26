@@ -5,7 +5,6 @@
 
 ###Autor
 Michael Fernandes
-michaelfernandes@id.uff.br
 
 # Star Wars Planet's Info
 
@@ -30,15 +29,16 @@ Instruções para utilizar em repositório local
 `npm run test`
 
 ## Construido utilizando
-React (https://reactjs.org/)
-Redux (https://redux.js.org/)
-Ant design (http://ant.design)
-Enzyme (https://airbnb.io/enzyme/)
-Jest (https://jestjs.io/)
+*React (https://reactjs.org/)
+*Redux (https://redux.js.org/)
+*Ant design (http://ant.design)
+*Enzyme (https://airbnb.io/enzyme/)
+*Jest (https://jestjs.io/)
 
 ## Autor
 
-* **Michael Fernandesz** - *Initial work* - [MichaelFernandes](https://github.com/mfazevedo)
+* **Michael Fernandes** - *michaelfernandes@id.uff.br
+* - [MichaelFernandes](https://github.com/mfazevedo)
 
 
 ## License
