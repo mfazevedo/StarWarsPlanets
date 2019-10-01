@@ -11,6 +11,32 @@ import {Provider}                   from 'react-redux';
 
 let wrapped
 
+describe('render loadind card', () =>{
+    beforeEach(()=>{
+        wrapped = mount(
+            <Root>
+                <App/>
+            </Root>
+        )  
+    })
+
+    it('Main card rendered',()=>{
+        expect(wrapped.find(Card).length).toEqual(1)
+    })
+    
+    it('Planet details not rendered when loading',()=>{
+        expect(wrapped.find(PlanetDetails).length).toEqual(0)
+    })
+    
+    it('Films list not rendered when loading',()=>{
+        expect(wrapped.find(MovieList).length).toEqual(0)
+    })
+    
+    it('Shuffle button rendered',()=>{
+        expect(wrapped.find(Button).length).toEqual(1)
+    })
+})
+
 describe('render full component after loading', () =>{
 
     const mockPlanet = {
@@ -46,11 +72,11 @@ describe('render full component after loading', () =>{
         expect(wrapped.find(Card).length).toEqual(1)
     })
     
-    it('Planet details not rendered when loading',()=>{
+    it('Planet details rendered after loading',()=>{
         expect(wrapped.find(PlanetDetails).length).toEqual(1)
     })
     
-    it('Films list not rendered when loading',()=>{
+    it('Films list rendered after loading',()=>{
         expect(wrapped.find(MovieList).length).toEqual(1)
     })
     
@@ -59,31 +85,7 @@ describe('render full component after loading', () =>{
     })
 })
 
-describe('render loadind card', () =>{
-    beforeEach(()=>{
-        wrapped = mount(
-            <Root>
-                <App/>
-            </Root>
-        )  
-    })
 
-    it('Main card rendered',()=>{
-        expect(wrapped.find(Card).length).toEqual(1)
-    })
-    
-    it('Planet details not rendered when loading',()=>{
-        expect(wrapped.find(PlanetDetails).length).toEqual(0)
-    })
-    
-    it('Films list not rendered when loading',()=>{
-        expect(wrapped.find(MovieList).length).toEqual(0)
-    })
-    
-    it('Shuffle button rendered',()=>{
-        expect(wrapped.find(Button).length).toEqual(1)
-    })
-})
 
 
 
