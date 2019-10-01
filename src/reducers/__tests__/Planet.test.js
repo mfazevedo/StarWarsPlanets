@@ -106,5 +106,10 @@ it('handle actions of type FETCH_PLANETS_FAILURE',()=>{
     expect(_.isEqual(newState, expectecObject)).toBe(true)
 })
 
+it('handle actions with unknow type',()=>{
+    const newState = Planet_Reducer(initialState, {})
+    expect(_.isEqual(newState, initialState)).toBe(true)
+})
+
 
 
