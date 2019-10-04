@@ -7,6 +7,7 @@ import {
     RETRIEVE_PLANET_FROM_CACHE
 }            from './types'
 import fetch from 'cross-fetch'
+import axios from 'axios'
 
 var _ = require('lodash')
 
@@ -142,12 +143,12 @@ export function getFilms(){
  * @param {string} address endereço da chamada de API
  */
 function apiCall(address) {
-  return fetch(address)
-    .then(res => {
-      return res.json()
+  axios.get(address)
+    .then(function (res) {
+      console.log(res)
+      return res
     })
-    .catch(error => {
-      console.error(error)
+    .catch(function (error){
       throw error
     })
 }
