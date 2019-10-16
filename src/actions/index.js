@@ -143,10 +143,9 @@ export function getFilms(){
  * @param {string} address endereço da chamada de API
  */
 function apiCall(address) {
-  axios.get(address)
+  return axios.get(address)
     .then(function (res) {
-      console.log(res)
-      return res
+      return res.data
     })
     .catch(function (error){
       throw error
