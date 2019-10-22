@@ -1,43 +1,36 @@
-import React    from 'react'
-import {mount}  from 'enzyme'
-import {Root}   from '../Root'
-import {App}    from '../components/App'
-import moxios   from 'moxios'
+import React                        from 'react'
+import {mount}                      from 'enzyme'
+import App                          from '../components/App'
+import Root                         from '../Root'
+import moxios                       from 'moxios'
+import {Button, Card}               from 'antd'
 import configureMockStore           from 'redux-mock-store'
 import thunk                        from 'redux-thunk'
 import {Provider}                   from 'react-redux';
+import PlanetDetails                from '../components/PlanetDetails'
 
 let wrapped
 
-const filmsMockResponse = {
-    count: 7,
-    results:[
-        {title:"A New Hope",              url:"https://swapi.co/api/films/1/"},
-        {title:"Attack of the Clones",    url:"https://swapi.co/api/films/5/"},
-        {title:"The Phantom Menace",      url:"https://swapi.co/api/films/4/"},
-        {title:"Revenge of the Sith",     url:"https://swapi.co/api/films/6/"},
-        {title:"Return of the Jedi",      url:"https://swapi.co/api/films/3/"},
-        {title:"The Empire Strikes Back", url:"https://swapi.co/api/films/7/"},
-        {title:"The Empire Strikes Back", url:"https://swapi.co/api/films/2/"}
-    ]
+const options = {
+    disableLifecycleMethods: true 
 }
 
 const mockPlanet = {
-    name: "Yavin IV",
-    climate: "temperate, tropical",
-    terrain: "jungle, rainforests",
-    population: "1000",
-    films: ["A New Hope"],
-    url: "https://swapi.co/api/planets/3/"
+	name: "Yavin IV",
+	climate: "temperate, tropical",
+	terrain: "jungle, rainforests",
+	population: "1000",
+	films: ["A New Hope"],
+	url: "https://swapi.co/api/planets/3/"
 }
 
 const initialPlanet = {
-    name: "OIOIOI",
-    climate: "temperate, tropical",
-    terrain: "jungle, rainforests",
-    population: "1000",
-    films: ["A New Hope"],
-    url: "https://swapi.co/api/planets/3/"
+	name: "Alderaan",
+	climate: "temperate",
+	terrain: "grasslands, mountains",
+	population: "2000000000",
+	films: ["A New Hope", "Revenge of the Sith"],
+	url: "https://swapi.co/api/planets/2/"
 }
 
 const mockStore = configureMockStore([thunk])
@@ -52,42 +45,38 @@ const store = mockStore({
     }        
 })
 
-
-
-const API_ADDRESS_PLANETS = 'https://swapi.co/api/planets/'
-const API_ADDRESS_FILMS   = 'https://swapi.co/api/films/'
+const address = /https:\/\/swapi.co\/api\/planets/[0-9]/
 
 beforeEach(()=>{
-    wrapped = mount(
-        <Provider store={store}>
-            <App/>
-        </Provider>
+    moxios.install()
+    moxios.stubRequest(
+        address,
+        {
+            status: 200,
+            response: mockPlanet
+        }
     )
 })
 
-describe('fetchMultiplePlanetsSuccess', ()=>{
-
-    beforeEach(()=>{
-        moxios.install()
-        moxios.stubRequest('https://swapi.co/api/planets/3/', {
-            status: 200,
-            response: mockPlanet            
-        })
-    })
-
-    /* it('Can fetch initial Movies', ()=>{
-        expect(action.payload).toEqual(mock)
-        //TODO: Fetch initial movies
-    }) */
-    
-    it('Should get a random planet from API', ()=>{
-        wrapped.find('.button-get-planet').simulate('click')
-        expect(wrapped.text()).toContain('Yavin IV')
-    })
-
-    afterEach(()=>{
-        moxios.uninstall()
-    })
+afterEach(()=>{
+    moxios.uninstall()
 })
 
- 
+it('Fetch planet on click',()=>{
+
+    wrapped = mount(
+        <Provider store={store}>
+            <App/>
+        </Provider>, options
+    ) 
+    
+    wrapped.find('.button-get-planet').first().simulate('click')
+    wrapped.update()
+    console.log('<<<', store.getState())
+    console.log('>>>', wrapped.text())
+    expect(wrapped.find(Card).length).toEqual(1)
+    //expect(wrapped.find(Card).dive().text()).toEqual('abc')//find(PlanetDetails).text()).toEqual('Yavin IV')
+
+    //expect(wrapped.text()).toEqual('Yavin IV')
+})
+
