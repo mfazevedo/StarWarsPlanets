@@ -6,7 +6,7 @@ import {
     FETCH_FILMS,
     RETRIEVE_PLANET_FROM_CACHE
 }            from './types'
-import fetch from 'cross-fetch'
+import axios from 'axios'
 
 var _ = require('lodash')
 
@@ -19,7 +19,6 @@ var _ = require('lodash')
 const API_ADDRESS_PLANETS = 'https://swapi.co/api/planets/'
 const API_ADDRESS_FILMS   = 'https://swapi.co/api/films/'
 
-let filmList = []
 
 /**
  * Função chamada para realizar o fech inicial de dados de filmes e planetas
@@ -51,7 +50,6 @@ export function getInitialData(){
  */
 export function getInitialPlanets(){
   return dispatch => {    
-      dispatch(updateFilmListFromStore()) 
       return apiCall(API_ADDRESS_PLANETS)
         .then(json => {
           dispatch(fetchMultiplePlanetsSuccess(json))
@@ -85,14 +83,12 @@ export function verifyCache(id){
 
 /**
  * Função que realiza a chamada para API re retorna UM planeta
- * dispara função @see {updateFilmListFromStore} 
  * dispara função @see {fetchPlanetsBegin} 
  * dispara a ação que irá informar ao reducer de planetas o novo planeta 
  * @param {String} id id do planeta que irá compor a url ex: https://swapi.co/api/planets/3
  */
 function getOnePlanet(id){
     return dispatch => {
-        dispatch(updateFilmListFromStore())
         dispatch(fetchPlanetsBegin())
         return apiCall(API_ADDRESS_PLANETS + id)
           .then(json => {
@@ -142,62 +138,13 @@ export function getFilms(){
  * @param {string} address endereço da chamada de API
  */
 function apiCall(address) {
-  return fetch(address)
-    .then(res => {
-      return res.json()
+  return axios.get(address)
+    .then(function (res) {
+      return res.data
     })
-    .catch(error => {
-      console.error(error)
+    .catch(function (error){
       throw error
     })
-}
-
-/**
- * Dado uma URL de filme retorna o Título do mesmo na Store.
- * @param {String} filmUrl URL de chamada do filme (Utilizado como ID único)
- * @Return {String} Título do filme
- */
-function findFilmInStore(filmUrl){
-    let obj =  _.find(filmList, {url: filmUrl})
-    
-    if (obj){
-      return obj.title
-    }
-    else{
-      return 'Not found title'
-    }
-}
-
-/**
- * Atualiza o array de filmes contido em um planeta para os Nomes de cada filme
- * no lugar de suas URL's
- * @param {Object} planet Planeta contendo a lista de filmes
- * @Return {Object} Planeta com array de filmes contendo os títulos
- */
-function loadMovieListFromStore(planet){
-  const films = planet.films.map( elt => findFilmInStore(elt))
-  return Object.assign(planet, {films: films})
-}
-
-/**
- * Atualiza o array de filmes contido em um array de planeta para os Nomes de cada filme
- * no lugar de suas URL's
- * @param {Array} planets Lista de Planetas
- * @Return {Array} Lista de Planetas com array de filmes contendo os títulos
- */
-function loadMovieListFromStoreMass(planets){
-  const planetList = planets.results.map( elt => loadMovieListFromStore(elt))
-  return Object.assign(planets, {results: planetList})
-}
-
-/**
- * Salva a lista de filmes da store para adição do
- * nome dos mesmos após as chamadas aos planetas
- */
-function updateFilmListFromStore() {
-  return (dispatch, getState) => {
-    filmList = getState().films
-  }
 }
 
 /**
@@ -227,22 +174,20 @@ export const retrievePlanetFromCache = planet => ({
 
 /**
  * Action creator para FETCH_PLANET_SUCCESS
- * chama a função interna que substitui as URL's dos filmes pelos nomes
  * @param {Object} planet Planeta a ser salvo
  */
 export const fetchPlanetSuccess = planet => ({
     type: FETCH_PLANET_SUCCESS,
-    payload: loadMovieListFromStore(planet)
+    payload: planet
 })
 
 /**
  * Action creator para FETCH_MULTIPLE_PLANETS_SUCCESS
- * chama a função interna que substitui as URL's dos filmes pelos nomes
  * @param {Object} planetsData Planeta a ser salvo
  */
 export const fetchMultiplePlanetsSuccess = planetsData => ({
   type: FETCH_MULTIPLE_PLANETS_SUCCESS,
-  payload: loadMovieListFromStoreMass(planetsData)
+  payload: planetsData
 })
 
 /**

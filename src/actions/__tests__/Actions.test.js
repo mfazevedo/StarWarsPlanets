@@ -4,8 +4,7 @@ import {
     fetchPlanetSuccess,
     retrievePlanetFromCache,
     fetchPlanetsBegin,
-    fetchAllFilms,
-    verifyCache
+    fetchAllFilms
 } from '../index'
 
 import {

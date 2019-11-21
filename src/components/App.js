@@ -63,7 +63,7 @@ class App extends React.Component {
                     <MovieList data={activePlanet.films}/>
                 </Card>
                 <br></br>
-                <Button onClick={shufflePlanet}>
+                <Button className='button-get-planet' onClick={shufflePlanet}>
                     NEXT
                 </Button>
             </div>

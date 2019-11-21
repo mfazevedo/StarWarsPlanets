@@ -1,8 +1,6 @@
 import React            from 'react'
-import {mount, shallow} from 'enzyme'
+import {mount}          from 'enzyme'
 import ErrorModal       from '../ErrorModal'
-import App              from '../App'
-import Root             from '../../Root'
 import {
     Modal,
     Button
